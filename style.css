@@ -472,6 +472,9 @@ body {
 .skill-card:nth-child(3) { transition-delay: 0.15s; }
 .skill-card:nth-child(4) { transition-delay: 0.20s; }
 .skill-card:nth-child(5) { transition-delay: 0.25s; }
+.skill-card:nth-child(6) { transition-delay: 0.30s; }
+.skill-card:nth-child(7) { transition-delay: 0.35s; }
+
 
 .skill-card:hover {
   border-color: rgba(79, 142, 255, 0.35);
