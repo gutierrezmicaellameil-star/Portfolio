@@ -1,4 +1,4 @@
-<!---Portfolio-->>
+<!---Portfolio-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,20 +13,8 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">MG<span class="logo-dot">.</span></div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#certificates">Certificates</a>      
-      <a href="#badges">Badges</a>      
-      <a href="#resume">Resume</a>
-      <a href="#contact">Contact</a>  
-    </nav>
-    <div class="nav-indicator"></div>
-  </header>
+  <!-- HEADER INCLUDE -->
+  <div id="header-include"></div>
 
   <!-- HERO -->
   <section id="home" class="hero">
@@ -38,7 +26,7 @@
         <div class="hero-tag">Available for opportunities</div>
         <h1>
           <span class="line">Hi, I'm</span>
-          <span class="line name-line">Micaella</span><span class="accent">.</span></span>
+          <span class="line name-line">Micaella</span><span class="accent">.</span>
         </h1>
         <p class="hero-sub">BSIT Student — Aspiring Developer<br>building clean, thoughtful web experiences.</p>
         <div class="hero-actions">
@@ -51,11 +39,9 @@
         <div class="img-ring"></div>
         <div class="img-ring2"></div>
         <div class="img-frame">
-          <img src="profile.png" alt="Micaella Mei L. Gutierrez">
+          <img src="assets/profile.png" alt="Micaella Mei L. Gutierrez">
         </div>
       </div>
-    </div>
-
     </div>
   </section>
 
@@ -107,7 +93,7 @@
         <span class="skill-name">Python</span>
         <div class="bar"><div class="skill-fill" style="--w: 100%"></div></div>
       </div>
-        <div class="skill-card">
+      <div class="skill-card">
         <div class="skill-icon">✦</div>
         <span class="skill-name">CSS</span>
         <div class="bar"><div class="skill-fill" style="--w: 100%"></div></div>
@@ -135,35 +121,25 @@
     </div>
   </section>
 
-  
-
-  <!--- CERTIFICATES-->>
-<section id="certificates" class="section certificate-section">
-  <div class="section-label">03 — Certificate</div>
-  <h2 class="section-title">Certificates</h2>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <span class="skill-name">Excel</span>
-      <img src="excel.png" alt="Excel Certificate" class="certificate-img">
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="section certificate-section">
+    <div class="section-label">03 — Certificate</div>
+    <h2 class="section-title">Certificates</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="skill-name">Excel</span>
+        <img src="assets/excel.png" alt="Excel Certificate" class="certificate-img">
+      </div>
+      <div class="skill-card">
+        <span class="skill-name">It Essentials</span>
+        <img src="assets/IT-Essentialscert.jpg" alt="It Essentials Certificate" class="certificate-img">
+      </div>
+      <div class="skill-card">
+        <span class="skill-name">Python</span>
+        <img src="assets/python.png" alt="Python Certificate" class="certificate-img">
+      </div>
     </div>
-    <div class="skill-card">
-      <span class="skill-name">It Essentials</span>
-      <img src="IT-Essentialscert.jpg" alt="It Essentials Certificate" class="certificate-img">
-    </div>
-    <div class="skill-card">
-      <span class="skill-name">Python</span>
-      <img src="python.png" alt="Python Certificate" class="certificate-img">
-    </div>
-    <div class="skill-card">
-      <span class="skill-name">Networking 1</span>
-      <img src="networking1.png" alt="Networking 1 Certificate" class="certificate-img">
-    </div>
-    <div class="skill-card">
-      <span class="skill-name">ACP</span>
-      <img src="ACP.png" alt="ACP Certificate" class="certificate-img">
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- RESUME -->
   <section id="resume" class="section resume-section">
@@ -200,12 +176,12 @@
 
   <!-- CONTACT -->
   <section id="contact" class="section contact-section">
-    <div class="section-label">04 — Contact</div>
+    <div class="section-label">05 — Contact</div>
     <h2 class="section-title">Contact Me</h2>
     <p class="contact-sub">I'm open to opportunities, collaborations, or just a good conversation.</p>
 
     <div class="contact-links">
-      <a href="mailto: gutierrezmicaellameil14@gmail.com" class="contact-card">
+      <a href="mailto:gutierrezmicaellameil14@gmail.com" class="contact-card">
         <span class="contact-icon">✉</span>
         <div>
           <div class="contact-type">Email</div>
@@ -217,9 +193,10 @@
         <span class="contact-icon">⌘</span>
         <div>
           <div class="contact-type">GitHub</div>
-          <div class="contact-val">https://github.com/gutierrezmicaellameil-star</div>
+          <div class="contact-val">github.com/gutierrezmicaellameil-star</div>
         </div>
         <span class="contact-arrow">↗</span>
+      </a>
       <a class="contact-card">
         <span class="contact-icon">☏</span>
         <div>
@@ -227,49 +204,59 @@
           <div class="contact-val">0945-590-7145</div>
         </div>
       </a>
-
-      </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <span class="logo">MG<span class="logo-dot">.</span></span>
-      <p>© 2026 Micaella Gutierrez — Built with care.</p>
-    </div>
-  </footer>
+  <!-- FOOTER INCLUDE -->
+  <div id="footer-include"></div>
 
   <script>
-    // Animate elements on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(el => {
-        if (el.isIntersecting) {
-          el.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+    // ── Load includes ──────────────────────────────────────────
+    async function loadInclude(id, path) {
+      try {
+        const res = await fetch(path);
+        if (!res.ok) throw new Error(`Failed to load ${path}`);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+      } catch (e) {
+        console.error(e);
+      }
+    }
 
-    document.querySelectorAll('.section, .skill-card, .timeline-item, .contact-card').forEach(el => {
-      observer.observe(el);
-    });
+    // Load header and footer, then run page scripts
+    Promise.all([
+      loadInclude('header-include', 'includes/header.html'),
+      loadInclude('footer-include', 'includes/footer.html')
+    ]).then(() => {
 
-    // Navbar active link highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.navbar nav a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+      // ── Scroll animation observer ──────────────────────────
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(el => {
+          if (el.isIntersecting) el.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.section, .skill-card, .timeline-item, .contact-card')
+        .forEach(el => observer.observe(el));
+
+      // ── Navbar active link highlight ───────────────────────
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.navbar nav a');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+          if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+        });
+        navLinks.forEach(a => {
+          a.classList.remove('active');
+          if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+        });
       });
-      navLinks.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
-      });
+
     });
   </script>
 
 </body>
 </html>
-
-<!---Portfolio-->>
+<!---Portfolio-->
