@@ -18,8 +18,6 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; min-width: 0; }
 
-html { scroll-behavior: smooth; }
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 68px;
@@ -45,7 +43,8 @@ body {
 .navbar {
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -106,6 +105,51 @@ body {
 }
 
 /* ===========================
+   HAMBURGER
+=========================== */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 201;
+  flex-shrink: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ===========================
+   OVERLAY
+=========================== */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+.nav-overlay.active { display: block; }
+
+/* ===========================
    HERO
 =========================== */
 .hero {
@@ -113,18 +157,23 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 64px;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 .hero-bg-grid {
   position: absolute;
   inset: 0;
+  width: 100%;
   background-image:
     linear-gradient(rgba(79, 142, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(79, 142, 255, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
 }
 
 .hero-glow {
@@ -170,10 +219,10 @@ body {
   content: '';
   width: 6px;
   height: 6px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: rgb(43, 255, 0);
   animation: pulse 1s infinite;
-
 }
 
 @keyframes pulse {
@@ -206,7 +255,7 @@ body {
 
 .hero-text h1 .name-line {
   display: block;
-  font-size: clamp(60px, 5vw, 120px);
+  font-size: clamp(44px, 5vw, 120px);
   color: var(--text);
   animation: fadeUp 0.8s 0.2s ease both;
 }
@@ -229,18 +278,21 @@ body {
   animation: fadeUp 0.8s 0.4s ease both;
 }
 
-/* IMAGE */
+/* ===========================
+   HERO IMAGE
+=========================== */
 .hero-img-wrap {
   position: relative;
   flex-shrink: 0;
   width: 400px;
-  height: 480px;     
-  display: flex;      
-  align-items: center;    
-  justify-content: center; 
-  overflow: hidden;   
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   animation: fadeUp 0.8s 0.3s ease both;
 }
+
 .img-ring {
   position: absolute;
   width: 320px;
@@ -265,20 +317,9 @@ body {
   pointer-events: none;
 }
 
-
-
-
 @keyframes spin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to   { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-
-
-
-@keyframes spinGlint {
-  from { rotate: 0deg; }
-  to   { rotate: 360deg; }
 }
 
 .img-frame {
@@ -296,7 +337,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  display: flex;
+  display: block;
 }
 
 .img-frame::after {
@@ -307,45 +348,6 @@ body {
   background: linear-gradient(180deg, transparent 55%, rgba(8,12,20,0.55) 80%, rgba(8,12,20,0.92) 100%);
   pointer-events: none;
   z-index: 2;
-}
-
-/* SCROLL HINT */
-.scroll-hint {
-  position: absolute;
-  bottom: 40px;
-  left: 64px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  animation: fadeUp 1s 0.8s ease both;
-}
-
-.scroll-line {
-  width: 48px;
-  height: 1px;
-  background: var(--muted);
-  position: relative;
-  overflow: hidden;
-}
-
-.scroll-line::after {
-  content: '';
-  position: absolute;
-  left: -100%;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--accent);
-  animation: scanline 2s 1.5s ease-in-out infinite;
-}
-
-@keyframes scanline {
-  0%   { left: -100%; }
-  100% { left: 100%; }
 }
 
 /* ===========================
@@ -364,15 +366,12 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   letter-spacing: 0.02em;
+  border: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6a11cb, #2575fc) ;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: #fff;
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: none;
-  transition: 0.3s;
 }
 
 .btn-primary:hover {
@@ -398,6 +397,7 @@ body {
   padding: 120px 64px;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -427,9 +427,7 @@ body {
   color: var(--text);
 }
 
-/* Horizontal rule between sections */
-.section + .section,
-.section ~ .section {
+.section + .section {
   border-top: 1px solid var(--border);
 }
 
@@ -506,8 +504,7 @@ body {
 .skill-card:nth-child(4) { transition-delay: 0.20s; }
 .skill-card:nth-child(5) { transition-delay: 0.25s; }
 .skill-card:nth-child(6) { transition-delay: 0.30s; }
-.skill-card:nth-child(7 ) { transition-delay: 0.35s; }
-
+.skill-card:nth-child(7) { transition-delay: 0.35s; }
 
 .skill-card:hover {
   border-color: rgba(79, 142, 255, 0.35);
@@ -538,12 +535,6 @@ body {
   overflow: hidden;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-}
-
 .skill-fill {
   height: 100%;
   width: 0;
@@ -556,8 +547,9 @@ body {
   width: var(--w);
 }
 
-
-<!---- Certificate--->
+/* ===========================
+   CERTIFICATES
+=========================== */
 .certificate-img {
   width: 100%;
   max-width: 100%;
@@ -568,31 +560,17 @@ body {
   margin-top: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   display: block;
-  overflow: hidden;
 }
 
 .certificate-section .skill-card {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
 
 .certificate-section .skills-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
-
-@media (max-width: 1024px) {
-  .certificate-section .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .certificate-section .skills-grid {
-    grid-template-columns: 1fr;
-  }
-}
-}<!--- Certificate--->
-
 
 /* ===========================
    RESUME / TIMELINE
@@ -691,6 +669,7 @@ body {
   display: flex;
   gap: 16px;
   flex-direction: column;
+  width: 100%;
   max-width: 560px;
 }
 
@@ -707,6 +686,8 @@ body {
   transition: all 0.25s;
   opacity: 0;
   transform: translateY(16px);
+  width: 100%;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -730,20 +711,25 @@ body {
   color: var(--accent);
   width: 44px;
   height: 44px;
+  min-width: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(79, 142, 255, 0.1);
   border-radius: 10px;
   flex-shrink: 0;
-  min-width: 44px;
+}
+
+.contact-card > div {
+  flex: 1;
+  min-width: 0;
 }
 
 .contact-type {
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(160, 171, 192, 0.897);
+  color: var(--muted);
   margin-bottom: 4px;
 }
 
@@ -753,11 +739,13 @@ body {
   word-break: break-all;
   overflow-wrap: break-word;
 }
+
 .contact-arrow {
   margin-left: auto;
   font-size: 18px;
   color: var(--muted);
-  transition: transform 0.2s;
+  transition: transform 0.2s, color 0.2s;
+  flex-shrink: 0;
 }
 
 .contact-card:hover .contact-arrow {
@@ -771,6 +759,7 @@ body {
 .footer {
   border-top: 1px solid var(--border);
   padding: 40px 64px;
+  margin-top: 40px;
 }
 
 .footer-inner {
@@ -795,10 +784,11 @@ body {
 }
 
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE — 900px
 =========================== */
 @media (max-width: 900px) {
   .navbar { padding: 18px 28px; }
+  .navbar nav { gap: 20px; }
   .hero { padding: 0 28px; }
   .hero-content {
     flex-direction: column-reverse;
@@ -820,7 +810,37 @@ body {
   .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
 }
 
+/* ===========================
+   RESPONSIVE — 540px
+=========================== */
 @media (max-width: 540px) {
+  .nav-toggle { display: flex; }
+  .navbar nav {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    position: fixed;
+    top: 0; right: 0;
+    height: 100vh;
+    width: 220px;
+    background: rgba(8,12,20,0.98);
+    border-left: 1px solid var(--border);
+    padding: 80px 28px 40px;
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  }
+  .navbar nav.open { transform: translateX(0); }
+  .navbar nav a {
+    font-size: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .navbar nav a:last-child { border-bottom: none; }
+  .navbar nav a:hover,
+  .navbar nav a.active { color: var(--text); padding-left: 6px; }
   .hero { padding: 0 20px; }
   .hero-content {
     flex-direction: column-reverse;
@@ -850,7 +870,34 @@ body {
   .contact-icon  { width: 38px; height: 38px; min-width: 38px; }
 }
 
+/* ===========================
+   FORCE DESKTOP NAV — 541px+
+=========================== */
+@media (min-width: 541px) {
+  .nav-toggle { display: none !important; }
+  .navbar nav {
+    display: flex !important;
+    position: static !important;
+    flex-direction: row !important;
+    height: auto !important;
+    width: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    gap: 36px !important;
+  }
+  .navbar nav a { padding: 0 !important; border-bottom: none !important; }
+  .nav-overlay { display: none !important; }
+}
+
+/* ===========================
+   RESPONSIVE — 430px
+=========================== */
 @media (max-width: 430px) {
+  .navbar { padding: 14px 20px; }
+  .logo { font-size: 19px; }
   .hero { padding: 0 16px; }
   .hero-text h1 .name-line { font-size: 48px; }
   .hero-sub { font-size: 14px; }
@@ -861,9 +908,13 @@ body {
   .section { padding: 64px 16px; }
   .skills-grid { grid-template-columns: 1fr 1fr; }
   .about-stats { gap: 16px; }
+  .contact-card { padding: 16px 14px; gap: 10px; }
   .footer { padding: 28px 16px; }
 }
 
+/* ===========================
+   RESPONSIVE — 375px
+=========================== */
 @media (max-width: 375px) {
   .hero-text h1 .name-line { font-size: 40px; }
   .hero-img-wrap { width: 190px; height: 260px; }
@@ -872,4 +923,6 @@ body {
   .img-ring2  { width: 180px; height: 242px; }
   .skills-grid { grid-template-columns: 1fr; }
   .stat-num { font-size: 26px; }
-}/*Portfolio*/
+}
+
+/*Portfolio*/
