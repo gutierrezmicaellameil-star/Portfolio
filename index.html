@@ -141,16 +141,39 @@
     </div>
   </section>
 
+
+    <!-- BADGES -->
+  <section id="badges" class="section badges-section">
+    <div class="section-label">04 — Badges</div>
+    <h2 class="section-title">Badges</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="skill-name">Excel</span>
+        <img src="assets/excel.png" alt="Excel Certificate" class="certificate-img">
+      </div>
+      <div class="skill-card">
+        <span class="skill-name">It Essentials</span>
+        <img src="assets/IT-Essentialscert.jpg" alt="It Essentials Certificate" class="certificate-img">
+      </div>
+      <div class="skill-card">
+        <span class="skill-name">Python</span>
+        <img src="assets/python.png" alt="Python Certificate" class="certificate-img">
+      </div>
+    </div>
+  </section>
+  <!--- BADGES -->>
+
+
   <!-- RESUME -->
   <section id="resume" class="section resume-section">
-    <div class="section-label">04 — Resume</div>
+    <div class="section-label">05 — Resume</div>
     <h2 class="section-title">Background</h2>
 
     <div class="timeline">
       <div class="timeline-item">
         <div class="tl-dot"></div>
         <div class="tl-content">
-          <div class="tl-meta">2022 — Present</div>
+          <div class="tl-meta">20 — Present</div>
           <h3>Bachelor of Science in Information Technology</h3>
           <p>Guagua National Colleges Inc.</p>
           <div class="tl-tags">
@@ -172,9 +195,9 @@
     </div>
 
     <a href="assets/Micaella Resume.pdf" class="btn btn-primary" style="margin-top: 40px;" download>Download CV</a>  
-    <a href="assets/Micaella Resume.pdf" target="_blank" class="btn btn-primary" style="margin-top: 40px;">SOpen CV</a>  <!-- CONTACT -->
+    <a href="assets/Micaella Resume.pdf" target="_blank" class="btn btn-primary" style="margin-top: 40px;">Open CV</a>  <!-- CONTACT -->
   <section id="contact" class="section contact-section">
-    <div class="section-label">05 — Contact</div>
+    <div class="section-label">06 — Contact</div>
     <h2 class="section-title">Contact Me</h2>
     <p class="contact-sub">I'm open to opportunities, collaborations, or just a good conversation.</p>
 
@@ -235,22 +258,33 @@
     document.querySelectorAll('.section, .skill-card, .timeline-item, .contact-card')
       .forEach(el => observer.observe(el));
 
-    // 2. Navbar active link highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.navbar nav a');
+  // 2. Navbar active link highlight
+  const navLinks = document.querySelectorAll('.navbar nav a');
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
-      });
-      navLinks.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
-      });
+  function updateActiveNav() {
+    let current = '';
+    const sections = [...document.querySelectorAll('section[id]')];
+    let minDistance = Infinity;
+
+    sections.forEach(s => {
+      const rect = s.getBoundingClientRect();
+      const distance = Math.abs(rect.top);
+      if (rect.top <= 150 && distance < minDistance) {
+        minDistance = distance;
+        current = s.getAttribute('id');
+      }
     });
 
-    // 3. Hamburger menu
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  }
+
+window.addEventListener('scroll', updateActiveNav);
+updateActiveNav();
+window.addEventListener('scroll', updateActiveNav);
+updateActiveNav();    // 3. Hamburger menu
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
     const overlay = document.getElementById('navOverlay');

@@ -572,6 +572,33 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+
+/* ===========================
+   BADGES
+=========================== */
+.badges-img {
+  width: 100%;
+  max-width: 100%;
+  height: 140px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 8px;
+  margin-top: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: block;
+}
+
+.badges-section .skill-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.badges-section .skills-grid {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+
 /* ===========================
    RESUME / TIMELINE
 =========================== */
