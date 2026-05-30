@@ -123,7 +123,7 @@
 
   <!-- CERTIFICATES -->
   <section id="certificates" class="section certificate-section">
-    <div class="section-label">03 — Certificate</div>
+    <div class="section-label">03 — Certificates</div>
     <h2 class="section-title">Certificates</h2>
     <div class="skills-grid">
       <div class="skill-card">
@@ -142,27 +142,69 @@
   </section>
 
 
-    <!-- BADGES -->
+  <!-- BADGES -->
   <section id="badges" class="section badges-section">
     <div class="section-label">04 — Badges</div>
     <h2 class="section-title">Badges</h2>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <span class="skill-name">Excel</span>
-        <img src="assets/excel.png" alt="Excel Certificate" class="badges-img">
+    <div class="badges-grid">
+
+      <div class="badge-card">
+        <div class="badge-img-wrap">
+          <img src="assets/computer-hardware-basics.png" alt="Computer Hardware Basics">
+        </div>
+        <div class="badge-info">
+          <h3>Computer Hardware Basics</h3>
+          <p class="badge-issuer">Cisco</p>
+          <p class="badge-date">Issued Nov 28, 2024</p>
+        </div>
       </div>
-      <div class="skill-card">
-        <span class="skill-name">It Essentials</span>
-        <img src="assets/IT-Essentialscert.jpg" alt="It Essentials Certificate" class="badges-img">
+
+      <div class="badge-card">
+        <div class="badge-img-wrap">
+          <img src="assets/it-essentials.png" alt="IT Essentials">
+        </div>
+        <div class="badge-info">
+          <h3>IT Essentials</h3>
+          <p class="badge-issuer">Cisco</p>
+          <p class="badge-date">Issued Dec 13, 2024</p>
+        </div>
       </div>
-      <div class="skill-card">
-        <span class="skill-name">Python</span>
-        <img src="assets/python.png" alt="Python Certificate" class="badges-img">
+
+      <div class="badge-card">
+        <div class="badge-img-wrap">
+          <img src="assets/python-essentials-1.png" alt="IT Essentials - Python">
+        </div>
+        <div class="badge-info">
+          <h3>IT Specialist - Python</h3>
+          <p class="badge-issuer">Certiport, a Pearson VUE business</p>
+          <p class="badge-date">Expires Jan 19, 2031</p>
+        </div>
       </div>
+
+      <div class="badge-card">
+        <div class="badge-img-wrap">
+          <img src="assets/microsoft-office-specialist-excel-associate-microsoft-365-apps.png" alt="Microsoft Office Specialist Excel Associate">
+        </div>
+        <div class="badge-info">
+          <h3>Microsoft Office Specialist: Excel Associate</h3>
+          <p class="badge-issuer">Microsoft</p>
+          <p class="badge-date">Expires May 28, 2030</p>
+        </div>
+      </div>
+
+      <div class="badge-card">
+        <div class="badge-img-wrap">
+          <img src="assets/it-specialist-python.png" alt="IT Specialist - Python">
+        </div>
+        <div class="badge-info">
+          <h3>Python Essentials 1</h3>
+          <p class="badge-issuer">Cisco</p>
+          <p class="badge-date">Issued Jan 28, 2026</p>
+        </div>
+      </div>
+
     </div>
   </section>
-  <!--- BADGES -->>
-
 
   <!-- RESUME -->
   <section id="resume" class="section resume-section">
@@ -256,6 +298,8 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.section, .skill-card, .timeline-item, .contact-card')
+      .forEach(el => observer.observe(el));
+      document.querySelectorAll('.section, .skill-card, .timeline-item, .contact-card, .badge-card')
       .forEach(el => observer.observe(el));
 
   // 2. Navbar active link highlight
