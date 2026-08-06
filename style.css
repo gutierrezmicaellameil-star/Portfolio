@@ -827,6 +827,20 @@ body {
   color: var(--accent);
 }
 
+.fa-square-facebook {
+  font-size: 30px;
+  color: #afd0f8;
+}
+
+.fa-facebook-messenger {
+  font-size: 30px;
+  color: #afd0f8;
+}
+
+.fa-square-instagram {
+  font-size: 30px;
+  color: #afd0f8;
+}
 /* ===========================
    FOOTER
 =========================== */
