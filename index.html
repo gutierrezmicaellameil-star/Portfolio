@@ -344,8 +344,10 @@
       document.querySelectorAll('.section, .skill-card, .timeline-item, .contact-card, .badge-card')
       .forEach(el => observer.observe(el));
 
-  // 2. Navbar active link highlight
+  // 2. Navbar active link highlight (includes Skills dropdown children)
   const navLinks = document.querySelectorAll('.navbar nav a');
+  const skillsDropdownToggle = document.getElementById('skillsDropdownToggle');
+  const dropdownChildIds = ['skills', 'certificates', 'badges'];
 
   function updateActiveNav() {
     let current = '';
@@ -365,12 +367,16 @@
       a.classList.remove('active');
       if (a.getAttribute('href') === '#' + current) a.classList.add('active');
     });
+
+    if (skillsDropdownToggle) {
+      skillsDropdownToggle.classList.toggle('active', dropdownChildIds.includes(current));
+    }
   }
 
-window.addEventListener('scroll', updateActiveNav);
-updateActiveNav();
-window.addEventListener('scroll', updateActiveNav);
-updateActiveNav();    // 3. Hamburger menu
+  window.addEventListener('scroll', updateActiveNav);
+  updateActiveNav();
+
+    // 3. Hamburger menu
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
     const overlay = document.getElementById('navOverlay');
@@ -385,6 +391,8 @@ updateActiveNav();    // 3. Hamburger menu
       toggle.classList.remove('open');
       menu.classList.remove('open');
       overlay.classList.remove('active');
+      const dropdown = document.querySelector('.nav-dropdown');
+      if (dropdown) dropdown.classList.remove('open');
     });
 
     menu.querySelectorAll('a').forEach(link => {
@@ -392,8 +400,27 @@ updateActiveNav();    // 3. Hamburger menu
         toggle.classList.remove('open');
         menu.classList.remove('open');
         overlay.classList.remove('active');
+        const dropdown = document.querySelector('.nav-dropdown');
+        if (dropdown) dropdown.classList.remove('open');
       });
     });
+
+    // 4. Skills dropdown toggle (click-to-open, works on both desktop & mobile/touch)
+    const dropdown = document.querySelector('.nav-dropdown');
+    if (skillsDropdownToggle && dropdown) {
+      skillsDropdownToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.toggle('open');
+        skillsDropdownToggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          skillsDropdownToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
 
   });
 </script>
