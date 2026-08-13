@@ -845,6 +845,7 @@ body {
 /* ===========================
    CONTACT
 =========================== */
+
 .contact-sub {
   color: var(--muted);
   font-size: 16px;
@@ -941,29 +942,68 @@ body {
   color: var(--accent);
 }
 
-.iconssm {
-  margin: 185px;
-  word-spacing: 50px;
+
+/* --- new code goes here --- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 100px;
+  align-items: start;
+  max-width: 850px;
+  margin: 0;
 }
 
-.fa-square-facebook {
+.contact-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg2);
+  height: fit-content;
+}
+
+.contact-social-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.447);
+}
+
+.social-icons {
+  display: flex;
+  gap: 24px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
   color: #afd0f8;
-  max-width: 100%;
-  height: 140px;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.fa-facebook-messenger {
-  color: #afd0f8;
-  max-width: 100%;
-  height: 140px;
+.social-icons a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
 }
 
-.fa-square-instagram {
-  color: #afd0f8;
-  max-width: 100%;
-  height: 140px;
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    gap: 24px;   /* <- add this, much tighter than the 60px on desktop */
+  }
 }
-
+/* ===========================
+   FOOTER
+=========================== */
+.footer {
+  ...
 /* ===========================
    FOOTER
 =========================== */
